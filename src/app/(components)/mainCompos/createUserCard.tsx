@@ -22,7 +22,12 @@ export default function CreateUserCard(){
             },
             body:JSON.stringify(data),
         })
-        console.log(response);
+        const result=await response.json();
+        console.log(result);
+        if(result.status=='200'){
+            router.push('/dashboard/'+userName);
+        }
+        //TODO handle signup failed
     }
 
     function handleLoginBtn(e: MouseEvent<HTMLButtonElement>){
@@ -33,7 +38,7 @@ export default function CreateUserCard(){
     return(
         <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
         <form className="card-body" onSubmit={handleSubmit}>
-            <h2> Create user</h2>
+            <h1> Create user</h1>
             <div className="form-control">
                 <label className="label">
                     <span className="label-text">User name</span>
@@ -56,10 +61,6 @@ export default function CreateUserCard(){
             <input type="password" placeholder="password"
             value={password} onChange={(e)=>setPassword(e.target.value)} 
             className="input input-bordered" required />
-            <label className="label">
-                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                {/* TODO setup the link to recover password */}
-            </label>
             </div>
             <div className="form-control mt-6 flex">
             <button className="btn btn-primary">Create!</button>

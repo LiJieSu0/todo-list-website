@@ -32,13 +32,12 @@ export default function DeleteTodoModal({todoItem}:TodoCardProps){
             <div className="modal-box h-48">
                 <div className="flex">
                     <h3 className="font-bold text-lg">Delete Todo!</h3>
-                    <button onClick={closeModal} className=" absolute right-3">test btn</button>
+                    <button onClick={closeModal} className=" absolute right-8">X</button>
                 </div>
                 <p className="py-4">Are you sure you want to delete?</p>
                 <div className="flex">
-                    <button onClick={handleDeleteConfirm} className="">Yes</button>
-                    
-                    <button onClick={closeModal} className="">No</button>
+                    <button onClick={handleDeleteConfirm}className="btn btn-info">Yes</button>
+                    <button onClick={closeModal} className="btn btn-error ml-5">No</button>
                 </div>
             </div>
                 <form method="dialog" className="modal-backdrop">

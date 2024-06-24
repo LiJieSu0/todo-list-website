@@ -17,7 +17,7 @@ export interface CurrModal{
 }
 
 export default function Dashboard({params}:any){
-    //TODO Logout button
+    //TODO handle no todo case
     const router=useRouter();
     const [todoItems,setTodoItems]=useState<TodoItem[]>([]);
     const [completedItems,setCompletedItems]=useState<TodoItem[]>([]);
@@ -50,19 +50,22 @@ export default function Dashboard({params}:any){
             if(response.status!=200) //login session error
                 router.push('/main');
         }
-        const fetchData = async () => {
+        const fetchDataFromDatabase = async () => {
                 try {
                     const fetchedData = await fetch('/api/todolist')
                         .then(response=>response.json());
-                    setTodoItems(fetchedData.data.filter((item:TodoItem)=>item.is_completed==false));
-                    setCompletedItems(fetchedData.data.filter((item:TodoItem)=>item.is_completed==true));
+                    if(fetchedData.data){
+                        setTodoItems(fetchedData.data.filter((item:TodoItem)=>item.is_completed==false));
+                        setCompletedItems(fetchedData.data.filter((item:TodoItem)=>item.is_completed==true));
+                    }
+                    //TODO handle no item case
                     setIsLoading(false);
                 } catch (error) {
                 console.error('Error fetching data:', error);
                 }
             };
             checkLogin();
-            fetchData(); 
+            fetchDataFromDatabase(); 
     },[router,params])
 
     function handleShowAddTodoModal(): void {
@@ -78,20 +81,35 @@ export default function Dashboard({params}:any){
         setIsShowingComplete((prev:boolean)=>!prev);
     }
 
+    function completedItemsTag(){
+        return(
+            completedItems.map((item:TodoItem,index:number)=>
+                // TODO set completed Item cards color
+                    <TodoCard key={index} todoItem={item} currModal={currModal}/>
+                )
+        )
+    }
+
+    function todoItemsTag(){
+        return(
+            todoItems.map((item:TodoItem,index:number)=>
+                <TodoCard key={index} todoItem={item} currModal={currModal} />
+            )
+        )
+    }
     return(
         <div className="">
                 <Navbar isLogin={true}/>
             <div className="bg-primary text-primary-content flex"> 
-                <button className="btn btn-ghost text-xl" onClick={handleTodoFolding}>Todo List </button>
-                {isShowingTodo?(<p>-</p>):(<p>+</p>)}
+                <button className="btn btn-ghost text-xl" onClick={handleTodoFolding}>
+                    Todo List {isShowingTodo ? (<span>-</span>) : (<span>+</span>)}
+                </button>
             </div>
             {isShowingTodo&& //Folding todo cards 
             (<div className="flex flex-wrap gap-4 justify-items-start mx-10 mb-5 mt-3">
                 {isLoading?(<h1>Loading...</h1>):(
                     <>
-                        {todoItems.map((item:TodoItem,index:number)=>
-                            <TodoCard key={index} todoItem={item} currModal={currModal} />
-                        )}
+                        {todoItemsTag()}
                         <div className="flex justify-center items-center bg-slate-800 w-96">
                             <button onClick={handleShowAddTodoModal} className="hover:bg-gray-200 
                                                 border-double border-4 border-stone-500 
@@ -113,10 +131,7 @@ export default function Dashboard({params}:any){
                 (<div className="flex flex-wrap gap-4 justify-items-start mx-10 mb-5 mt-3">
                 {isLoading?(<div>Loading...</div>):
                     (<>
-                        {completedItems.map((item:TodoItem,index:number)=>
-                        // TODO set completed Item cards
-                            <TodoCard key={index} todoItem={item} currModal={currModal}/>
-                        )}
+                        {completedItems.length==0?<p>No completed item.</p>:completedItemsTag()}
                     </>)}
             </div>
             )

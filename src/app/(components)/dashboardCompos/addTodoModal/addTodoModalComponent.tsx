@@ -58,7 +58,7 @@ export default function AddTodoModal(){
                     <div className="modal-box w-11/12 max-w-5xl h-5/6">
                         <div className="flex">
                             <h3 className="font-bold text-lg">Add Todo!</h3>
-                            <button onClick={closeModal} className=" absolute right-2">test btn</button>
+                            <button onClick={closeModal} className=" absolute right-6">X</button>
                         </div>
                         <form onSubmit={handleAddTodoSubmit}>
                             <div className="mb-5">
