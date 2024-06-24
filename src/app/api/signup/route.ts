@@ -1,7 +1,6 @@
 import { NextResponse,NextRequest } from "next/server";
 import { addUserDoc, userSignup } from "@/utils/firebaseConfig";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
-import { initializeApp } from "firebase/app";
+
 
 //TODO refactor signup
 export async function POST(req:NextRequest){

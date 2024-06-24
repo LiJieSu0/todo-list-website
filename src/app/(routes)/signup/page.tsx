@@ -48,7 +48,7 @@ export default function Signup(){
 
     return (
         <div className="min-h-screen flex flex-col bg-orange-200"> 
-            <Navbar/>
+            <Navbar isLogin={false}/>
             {isLogin?(<h1>Logged in</h1>):(<h1>No login session</h1>)}
             <div className="flex flex-grow justify-center items-center">
                 <div className="w-1/3 bg-gray-100 p-8 rounded-lg shadow-lg">
