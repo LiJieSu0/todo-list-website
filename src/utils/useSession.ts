@@ -7,12 +7,14 @@ export function useSession(){
             try{
                 const response=await fetch('/api/checkSession');
                 const result=await response.json();
-                setCurrUserName(result.userName);
+                if(result.userName!=undefined)
+                    setCurrUserName(result.userName);
             }catch(err){
                 console.log("Get cookie error "+err);
             }
         }
         checkSession();
     })
+    
     return currUserName;
 }

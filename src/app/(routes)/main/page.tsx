@@ -19,8 +19,8 @@ export default function Main(){
                 <div className="hero-content flex-col ">
                     <ParagraphComponent/>
                     <div className="flex space-x-4">
-                        <button className="btn btn-active btn-neutral"><Link href="/login">Login now!</Link> </button>
-                        <button className="btn btn-active btn-neutral"><Link href="/signup">Signup here!</Link></button>
+                        <button className="btn btn-active btn-neutral"><Link href="/login">Log in now!</Link> </button>
+                        <button className="btn btn-active btn-neutral"><Link href="/signup">Sign up here!</Link></button>
                     </div>
                 </div>
             </div>

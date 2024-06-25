@@ -11,7 +11,6 @@ export default function Navbar({currUserName}:NavbarProps){
     useEffect(()=>{
         setIsLogin(currUserName!="");
     },[isLogin,currUserName])
-
     async function handleLogoutBtn(){
         const response=await fetch('/api/logout',{
             method:'POST',
