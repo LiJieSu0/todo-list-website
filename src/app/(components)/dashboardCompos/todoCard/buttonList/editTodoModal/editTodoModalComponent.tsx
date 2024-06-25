@@ -1,10 +1,11 @@
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { useRef } from 'react';
 import { TodoCardProps } from "../../todoCardComponent";
 
 export default function EditTodoModal({todoItem,currModal}:TodoCardProps){
 
     const modalRef=useRef<HTMLDialogElement>(null);
+
 
     async function handleEditTodoSubmit(e:FormEvent<HTMLFormElement>){
         e.preventDefault();
@@ -20,7 +21,8 @@ export default function EditTodoModal({todoItem,currModal}:TodoCardProps){
                     "created_date":todoItem.create_date,
                     "due_date":currModal.currDueDate,
                     "user_id":todoItem.user_id,
-                    "doc_uid":todoItem.doc_uid
+                    "doc_uid":todoItem.doc_uid,
+                    "is_completed":currModal.currEditIsComplete
                 })
             })
             closeModal();
@@ -43,6 +45,10 @@ export default function EditTodoModal({todoItem,currModal}:TodoCardProps){
             modalRef.current.close();
         }
     }
+    function handleCompleteCheckBox(){
+        currModal.setcurrEditIsComplete((prev)=>!prev);
+    }
+
     return(
         <div>
             <dialog ref={modalRef} id="edit_todo_modal" className="modal">
@@ -74,15 +80,26 @@ export default function EditTodoModal({todoItem,currModal}:TodoCardProps){
                             </div>
                             <div>
                                 <label htmlFor="date" className="block mt-2 mb-2 text-sm font-medium text-gray-900 dark:text-white">Due Date</label>
-                                <input type="date" id="date" value={currModal.currDueDate} 
-                                onChange={(e)=>currModal.setCurrDueDate(e.target.value)} 
-                                className="shadow-md block p-2 text-gray-900 border border-gray-300 rounded-lg 
-                                                                            bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 
-                                                                            dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
-                                                                            dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                                <div className="flex">
+                                    <input type="date" id="date" value={currModal.currDueDate} 
+                                    onChange={(e)=>currModal.setCurrDueDate(e.target.value)} 
+                                    className="shadow-md block p-2 text-gray-900 border border-gray-300 rounded-lg 
+                                                                                bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 
+                                                                                dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
+                                                                                dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                                    <label className="cursor-pointer label ml-2">
+                                        <span className="label-text mr-2">Completed?</span>
+                                        <input type="checkbox" 
+                                                checked={currModal.currEditIsComplete} 
+                                                onChange={handleCompleteCheckBox}
+                                                className="checkbox checkbox-success" />
+                                    </label>
+                                </div>
+
                             </div>
+
                             <button type="submit"  className="absolute bottom-4 right-6
-                                                                mt-2 btn btn-active">Submit</button>
+                                                                mt-2 btn btn-active">Submit Change</button>
                         </form>
                         <div className="modal-action">
 

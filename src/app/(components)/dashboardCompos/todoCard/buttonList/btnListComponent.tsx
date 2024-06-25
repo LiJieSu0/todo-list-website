@@ -36,15 +36,6 @@ export default function ButtonList({todoItem,currModal}:TodoCardProps){
     }
     return(
         <div className="justify-end mr-5 mb-2 p-2">
-            {!todoItem.is_completed&& <button className="hover:bg-gray-200 p-2 rounded-full">
-                <Image
-                src="/add.png"
-                width={20}
-                height={20}
-                alt="Add pic"
-                />
-                
-            </button>}
             <button onClick={handleShowDeleteTodoModal} className="hover:bg-gray-200 p-2 rounded-full">
                 <Image
                 src="/bin.png"

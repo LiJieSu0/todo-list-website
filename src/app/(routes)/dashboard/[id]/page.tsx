@@ -12,9 +12,11 @@ export interface CurrModal{
     currTitle:string,
     currDescriptions:string,
     currDueDate:string,
+    currEditIsComplete:boolean,
     setCurrTitle:React.Dispatch<React.SetStateAction<string>>,
     setCurrDescriptions:React.Dispatch<React.SetStateAction<string>>,
     setCurrDueDate:React.Dispatch<React.SetStateAction<string>>
+    setcurrEditIsComplete:React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function Dashboard({params}:any){
@@ -29,13 +31,16 @@ export default function Dashboard({params}:any){
     const [currTitle,setCurrTitle]=useState('');
     const [currDescriptions,setCurrDescriptions]=useState('');
     const [currDueDate,setCurrDueDate]=useState('');
+    const [currEditIsComplete,setcurrEditIsComplete]=useState(false);
     const currModal:CurrModal={
         currTitle,
         currDescriptions,
         currDueDate,
+        currEditIsComplete,
         setCurrTitle,
         setCurrDescriptions,
-        setCurrDueDate
+        setCurrDueDate,
+        setcurrEditIsComplete
     }
     const currUserName=useSession();
     useEffect(()=>{
@@ -59,7 +64,7 @@ export default function Dashboard({params}:any){
                         setTodoItems(fetchedData.data.filter((item:TodoItem)=>item.is_completed==false));
                         setCompletedItems(fetchedData.data.filter((item:TodoItem)=>item.is_completed==true));
                     }
-                    //TODO handle no item case
+                    //TODO add firebase pagination
                     setIsLoading(false);
                 } catch (error) {
                 console.error('Error fetching data:', error);
