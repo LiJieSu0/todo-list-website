@@ -11,7 +11,6 @@ export default function Signup(){
     const [confirmedPassword, setConfirmedPassword]=useState<string>('');
     const [signupRes,setSignupRes]=useState<string>('');
     const [user,setUser]=useState<any>(null);
-
     const [isLogin,setIsLogin]=useState(false);
     useEffect(()=>{
 
@@ -49,7 +48,6 @@ export default function Signup(){
     return (
         <div className="min-h-screen flex flex-col bg-orange-200"> 
             <Navbar isLogin={false}/>
-            {isLogin?(<h1>Logged in</h1>):(<h1>No login session</h1>)}
             <div className="flex flex-grow justify-center items-center">
                 <div className="w-1/3 bg-gray-100 p-8 rounded-lg shadow-lg">
                     <h1 className="text-3xl mb-6 text-center">Sign Up</h1>

@@ -38,7 +38,7 @@ export default function CreateUserCard(){
     return(
         <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
         <form className="card-body" onSubmit={handleSubmit}>
-            <h1> Create user</h1>
+            <h1 className=" text-3xl"> Create user</h1>
             <div className="form-control">
                 <label className="label">
                     <span className="label-text">User name</span>

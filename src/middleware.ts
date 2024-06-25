@@ -6,7 +6,7 @@ import {  jwtVerify } from 'jose';
 const secret = new TextEncoder().encode(process.env.TOKEN_SECRET_KEY);
 export async function middleware(request: NextRequest) {
     const path=request.nextUrl.pathname;
-    const publicPathArr=['/main','/login','signup'];
+    const publicPathArr=['/main','/login','/signup'];
     const sessionToken= request.cookies.get('session')?.value||'';
     let currUser:string="";
 
@@ -21,8 +21,9 @@ export async function middleware(request: NextRequest) {
     // if(path.startsWith('/dashboard')){
     //     const userNameInPath=path.split('/')[1];
     // }
-
+    console.log("curr path "+path);
     if(publicPathArr.includes(path)){
+        console.log("public path")
         return NextResponse.next();
     }
 

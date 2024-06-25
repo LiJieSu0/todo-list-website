@@ -21,6 +21,10 @@ export async function POST(req:NextRequest){
                 message="Password is too weak";
                 statusCode=500;
                 break;
+            case 'auth/invalid-email':
+                message = 'Invalid email';
+                statusCode=500;
+                break;
             case "auth/email-already-in-use":
                 message="Email already exist";
                 statusCode=500;
