@@ -35,7 +35,6 @@ export default function Navbar({currUserName}:NavbarProps){
                     </summary>
                     <ul className="p-2 bg-base-100 rounded-t-none">
                         <li><Link href={`/dashboard/${currUserName}`}>To {currUserName} dashboard</Link></li> 
-                        {/* TODO get username from server */}
                         <li></li>
                     </ul>
                     </details>
