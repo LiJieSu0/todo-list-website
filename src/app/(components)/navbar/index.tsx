@@ -23,7 +23,7 @@ export default function Navbar({currUserName}:NavbarProps){
     return(
         <div className="navbar bg-base-100">
             <div className="flex-1">
-                <a href='/main' className="btn btn-ghost text-xl">Todo Lists</a>
+                <a href='/main' className="btn btn-ghost text-xl">Todo List</a>
             </div>
             <div className="flex-none">
                 <ul className="menu menu-horizontal px-1">
