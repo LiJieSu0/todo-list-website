@@ -46,8 +46,8 @@ export default function Dashboard({params}:any){
                 },
                 body:JSON.stringify({'userName':params.id})
             })
-            console.log(response.status);
-            if(response.status!=200) //login session error
+            const result=await response.json();
+            if(result.status!='200') 
                 router.push('/main');
         }
         const fetchDataFromDatabase = async () => {

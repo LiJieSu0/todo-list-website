@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { EXPIRES_TIME_IN_SECONDS, SECRET_KEY,COOKIE_NAME } from "./types";
+import { EXPIRES_TIME_IN_SECONDS, SECRET_KEY,COOKIE_NAME, CookiePayload } from "./types";
 import jwt from 'jsonwebtoken';
 
 export const setSessionCookieWithResponse = (token: string,response:NextResponse):NextResponse => {
@@ -30,10 +30,10 @@ export const renewCookie=(response:NextResponse):NextResponse=>{
     return response;
 }
 
-export const getCookiePayload=()=>{
+export const getCookiePayload=():CookiePayload|undefined=>{
     const sessionValue=getSessionCookie();
     if(sessionValue!=undefined){
-      return jwt.verify(sessionValue,SECRET_KEY)
+      return jwt.verify(sessionValue,SECRET_KEY) as CookiePayload
     }
     return undefined;
 }
