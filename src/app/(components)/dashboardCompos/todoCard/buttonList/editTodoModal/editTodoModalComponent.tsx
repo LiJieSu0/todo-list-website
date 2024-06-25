@@ -48,8 +48,8 @@ export default function EditTodoModal({todoItem,currModal}:TodoCardProps){
             <dialog ref={modalRef} id="edit_todo_modal" className="modal">
                     <div className="modal-box w-11/12 max-w-5xl h-5/6">
                         <div className="flex">
-                            <h3 className="font-bold text-lg">Add Todo!</h3>
-                            <button onClick={closeModal} className=" absolute right-2">test btn</button>
+                            <h3 className="font-bold text-lg">Edit Todo!</h3>
+                            <button onClick={closeModal} className=" absolute right-6">X</button>
                         </div>
                         <form onSubmit={handleEditTodoSubmit}>
                             <div className="mb-5">

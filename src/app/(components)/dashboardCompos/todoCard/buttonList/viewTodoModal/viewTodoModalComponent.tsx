@@ -2,7 +2,6 @@ import { FormEvent, FormEventHandler, useEffect } from "react";
 import { useState,useRef } from 'react';
 import { TodoCardProps } from "../../todoCardComponent";
 export default function ViewTodoModal({todoItem,currModal}:TodoCardProps){
-    console.log(todoItem.title);
     const modalRef=useRef<HTMLDialogElement>(null);
     function closeModal(){
         if(modalRef.current){

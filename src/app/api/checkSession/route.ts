@@ -15,7 +15,7 @@ export async function POST(req:NextRequest){
 
 }
 
-export async function GET(){
+export async function GET(){ //TODO prevent user calling editing
     const cookiePayload=getCookiePayload();
     if(cookiePayload==undefined){
         return NextResponse.json({"message":"Login session error","isLogin":false,status:401});
