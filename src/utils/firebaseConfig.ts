@@ -9,13 +9,13 @@ import { initialize } from "next/dist/server/lib/render-server";
 import { TodoItem, UserBasicInfo } from "./types";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBGYUPFMSA-Y96MFI6Q2AZxQxk-FQuWxLk",
-    authDomain: "todowebsite-c93c2.firebaseapp.com",
-    projectId: "todowebsite-c93c2",
-    storageBucket: "todowebsite-c93c2.appspot.com",
-    messagingSenderId: "698972296432",
-    appId: "1:698972296432:web:49e1080f11c9d5e52c5e35",
-    measurementId: "G-H6J0915CEE"
+    apiKey: process.env.FIREBASE_API_KEY,
+    authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.FIREBASE_MESSAGEING_SENDER_ID,
+    appId: process.env.FIREBASE_APP_ID,
+    measurementId: process.env.FIREBASE_MEASUREMENT_ID,
 };
 const TODO_COLLECTION_NAME='todos';
 const USER_COLLECTION_NAME='userInfos';

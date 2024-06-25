@@ -12,11 +12,11 @@ export async function POST(req:NextRequest){
         let message="";
         let statusCode=500;
         if(fireBaseResponse.user!=undefined){
-            addUserDoc(fireBaseResponse.user.uid,data.userName);     
+            addUserDoc(fireBaseResponse.user.uid,data.userName);//TODO another way to handle user docs     
             return NextResponse.json({"message":"User signup success",status:200});
         }
         console.log(fireBaseResponse);
-        switch(fireBaseResponse){ //TODO handle other error code.
+        switch(fireBaseResponse){ 
             case "auth/weak-password": //TODO handle correct error code.
                 message="Password is too weak";
                 statusCode=500;
@@ -36,7 +36,7 @@ export async function POST(req:NextRequest){
         console.log(err.message);
         return NextResponse.json({"message":err.message,status:500});
     }
-    //TODO after create user, login automatically.
+    
 
 }
 
