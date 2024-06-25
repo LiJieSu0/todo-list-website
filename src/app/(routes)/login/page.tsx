@@ -4,17 +4,15 @@ import Navbar from "@/app/(components)/navbar";
 import LoginForm from "@/app/(components)/loginForm";
 import { FormEvent, useEffect, useState } from "react";
 import {useRouter} from "next/navigation";
+import { useSession } from "@/utils/useSession";
 
 export default function Login(){
     const [email,setEmail]=useState<string>('');
     const [userName,setUserName]=useState<string>('');
     const [password,setPassword]=useState<string>('');
-    const [isLogin,setIsLogin]=useState(false);
     const router=useRouter();
 
-    useEffect(()=>{
-
-    },[isLogin]);
+    const currUserName=useSession();
 
     async function handleSubmit(e: FormEvent<HTMLFormElement>){
         e.preventDefault();
@@ -60,7 +58,7 @@ export default function Login(){
 
     return (
         <div className="min-h-screen flex flex-col bg-orange-200">
-            <Navbar isLogin={false}/>
+            <Navbar currUserName={currUserName}/>
             <div className="flex flex-grow justify-center items-center">
                 <div className="w-1/3 bg-gray-100 p-8 rounded-lg shadow-lg">
                     <h1 className="text-3xl mb-6 text-center">Login Page</h1>

@@ -14,3 +14,11 @@ export async function POST(req:NextRequest){
     return NextResponse.json({"message":"Login session OK",status:200});
 
 }
+
+export async function GET(){
+    const cookiePayload=getCookiePayload();
+    if(cookiePayload==undefined){
+        return NextResponse.json({"message":"Login session error","isLogin":false,status:401});
+    }
+    return NextResponse.json({"message":"Login session OK","isLogin":true,"userName":cookiePayload.userName,status:200});
+}

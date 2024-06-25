@@ -6,6 +6,7 @@ import { useState,useEffect, useRef } from "react";
 import { TodoItem } from "@/utils/types";
 import TodoCard from "@/app/(components)/dashboardCompos/todoCard/todoCardComponent";
 import AddTodoModal from "@/app/(components)/dashboardCompos/addTodoModal/addTodoModalComponent";
+import { useSession } from "@/utils/useSession";
 
 export interface CurrModal{
     currTitle:string,
@@ -36,6 +37,7 @@ export default function Dashboard({params}:any){
         setCurrDescriptions,
         setCurrDueDate
     }
+    const currUserName=useSession();
     useEffect(()=>{
         const checkLogin=async ()=>{
             const response=await fetch ('/api/checkSession',{
@@ -98,7 +100,7 @@ export default function Dashboard({params}:any){
     }
     return(
         <div className="">
-                <Navbar isLogin={true}/>
+            <Navbar currUserName={currUserName}/>
             <div className="bg-primary text-primary-content flex"> 
                 <button className="btn btn-ghost text-xl" onClick={handleTodoFolding}>
                     Todo List {isShowingTodo ? (<span>-</span>) : (<span>+</span>)}

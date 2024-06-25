@@ -1,13 +1,16 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface NavbarProps{
-    isLogin:boolean
+    currUserName:string
 }
-export default function Navbar({isLogin}:NavbarProps){
+export default function Navbar({currUserName}:NavbarProps){
     const router=useRouter();
-    const [userName,setUserName]=useState('');
+    const [isLogin,setIsLogin]=useState(false);
+    useEffect(()=>{
+        setIsLogin(currUserName!="");
+    },[isLogin,currUserName])
 
     async function handleLogoutBtn(){
         const response=await fetch('/api/logout',{
@@ -32,7 +35,7 @@ export default function Navbar({isLogin}:NavbarProps){
                         My Dashboard
                     </summary>
                     <ul className="p-2 bg-base-100 rounded-t-none">
-                        <li><Link href={`/dashboard/${userName}`}>To my dashboard</Link></li> 
+                        <li><Link href={`/dashboard/${currUserName}`}>To {currUserName} dashboard</Link></li> 
                         {/* TODO get username from server */}
                         <li></li>
                     </ul>

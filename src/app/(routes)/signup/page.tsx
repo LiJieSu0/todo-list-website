@@ -4,6 +4,7 @@ import Navbar from "@/app/(components)/navbar";
 import SignupForm from "@/app/(components)/signupForm";
 import { FormEvent, useEffect, useState } from "react";
 import { UserBasicInfo } from "@/utils/types";
+import { useSession } from "@/utils/useSession";
 export default function Signup(){
     const [email,setEmail]=useState<string>('');
     const [userName,setUserName]=useState<string>('');
@@ -12,10 +13,8 @@ export default function Signup(){
     const [signupRes,setSignupRes]=useState<string>('');
     const [user,setUser]=useState<any>(null);
     const [isLogin,setIsLogin]=useState(false);
-    useEffect(()=>{
 
-    },[]);
-
+    const currUserName=useSession();
     async function handleSubmit(e: FormEvent<HTMLFormElement>){
         e.preventDefault();
         const data:UserBasicInfo={
@@ -47,7 +46,7 @@ export default function Signup(){
 
     return (
         <div className="min-h-screen flex flex-col bg-orange-200"> 
-            <Navbar isLogin={false}/>
+            <Navbar currUserName={currUserName}/>
             <div className="flex flex-grow justify-center items-center">
                 <div className="w-1/3 bg-gray-100 p-8 rounded-lg shadow-lg">
                     <h1 className="text-3xl mb-6 text-center">Sign Up</h1>
