@@ -32,6 +32,7 @@ export async function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL(`/dashboard/${currUser}`,request.nextUrl));
     }
     else{
+        console.log("redirect to main");
         return NextResponse.redirect(new URL('/main',request.nextUrl));
     }
 

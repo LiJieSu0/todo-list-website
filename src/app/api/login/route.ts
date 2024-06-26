@@ -5,9 +5,11 @@ import jwt from 'jsonwebtoken';
 import { getUserDocWithUid } from '@/utils/firebaseConfig';
 import { SECRET_KEY } from "@/utils/types";
 import { setSessionCookieWithResponse } from "@/utils/cookieConfig";
+import logger from "@/utils/logger";
 
 export async function POST(req:NextRequest){
     const data=await req.json();
+    logger.info('Login Api Post Called');
     let accessToken:string="";
     try{
         const fireBaseRes=await signInWithEmailAndPassword(auth,data.email,data.password);
